@@ -3,7 +3,6 @@ import sys
 
 
 def process(path_file, instance):
-    """Aqui irá sua implementação"""
     for index in range(len(instance)):
         if instance.search(index)["nome_do_arquivo"] == path_file:
             return None
@@ -16,12 +15,20 @@ def process(path_file, instance):
     }
 
     instance.enqueue(result)
-    print(result, sys.stdout)
+    print(result, file=sys.stdout)
 
 
 def remove(instance):
-    """Aqui irá sua implementação"""
+    if len(instance) == 0:
+        print("Não há elementos", file=sys.stdout)
+    else:
+        file_deleted = instance.dequeue()["nome_do_arquivo"]
+        print(f"Arquivo {file_deleted} removido com sucesso", file=sys.stdout)
 
 
 def file_metadata(instance, position):
-    """Aqui irá sua implementação"""
+    if position > len(instance):
+        print("Posição inválida", file=sys.stderr)
+    else:
+        file = instance.search(position)
+        print(file, file=sys.stdout)
